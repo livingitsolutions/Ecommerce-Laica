@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "vitest run",
-    "format:check": "prettier --check src db docs scripts *.json *.ts *.js *.html README.md"
+    "format:check": "prettier --check src db server docs scripts *.json *.ts *.js *.html README.md"
   },
   "dependencies": {
     "@netlify/database": "^2.0.3",

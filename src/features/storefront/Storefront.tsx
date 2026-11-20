@@ -478,6 +478,7 @@ export default function Storefront() {
           </div>
           <div>
             <h3>THE GALLERY</h3>
+            <a href="/account">Customer account</a>
             <button onClick={() => setOverlay("about")}>Our story</button>
             <button onClick={() => setOverlay("live")}>Live preview</button>
             <button onClick={() => setOverlay("about")}>

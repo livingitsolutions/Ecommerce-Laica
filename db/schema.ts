@@ -25,12 +25,33 @@ const ownership = () => ({
   createdAt: utc("created_at"),
   updatedAt: utc("updated_at"),
 });
-export const users = pgTable("users", {
-  id: id(),
-  authSubject: text("auth_subject").notNull().unique(),
-  email: text("email").notNull(),
-  createdAt: utc("created_at"),
+export const users = pgTable(
+  "users",
+  {
+    id: id(),
+    authSubject: text("auth_subject").notNull().unique(),
+    identityIssuer: text("identity_issuer"),
+    status: text("status").notNull().default("suspended"),
+    email: text("email").notNull(),
+    createdAt: utc("created_at"),
+    updatedAt: utc("updated_at"),
+  },
+  (table) => [
+    check("user_status", sql`${table.status} in ('active','suspended')`),
+  ],
+);
+export const customerProfiles = pgTable("customer_profiles", {
+  userId: uuid("user_id")
+    .primaryKey()
+    .references(() => users.id),
+  displayName: text("display_name"),
   updatedAt: utc("updated_at"),
+});
+export const platformOwners = pgTable("platform_owners", {
+  userId: uuid("user_id")
+    .primaryKey()
+    .references(() => users.id),
+  grantedAt: utc("granted_at"),
 });
 export const sellers = pgTable("sellers", {
   id: id(),
@@ -56,7 +77,11 @@ export const customerAddresses = pgTable(
     countryCode: text("country_code").notNull(),
     phone: text("phone").notNull(),
   },
-  (t) => [unique().on(t.sellerId, t.id), index().on(t.sellerId)],
+  (t) => [
+    unique().on(t.sellerId, t.id),
+    index().on(t.sellerId),
+    index("address_book_idx").on(t.sellerId, t.userId),
+  ],
 );
 export const sellerMembers = pgTable(
   "seller_members",
@@ -66,11 +91,14 @@ export const sellerMembers = pgTable(
       .notNull()
       .references(() => users.id),
     role: text("role").notNull(),
+    status: text("status").notNull().default("suspended"),
   },
   (t) => [
     unique().on(t.sellerId, t.id),
     index().on(t.sellerId),
     unique().on(t.sellerId, t.userId),
+    index("member_lookup_idx").on(t.userId, t.status),
+    check("membership_status", sql`${t.status} in ('active','suspended')`),
     check(
       "seller_role",
       sql`${t.role} in ('owner','admin','catalog','fulfillment','support')`,
@@ -731,5 +759,34 @@ export const auditLogs = pgTable(
     unique().on(t.sellerId, t.id),
     index().on(t.sellerId),
     index().on(t.sellerId, t.createdAt),
+  ],
+);
+export const identityEvents = pgTable(
+  "identity_events",
+  {
+    id: id(),
+    requestId: uuid("request_id").notNull(),
+    action: text("action").notNull(),
+    outcome: text("outcome").notNull(),
+    actorId: uuid("actor_id").references(() => users.id),
+    targetUserId: uuid("target_user_id").references(() => users.id),
+    sellerId: uuid("seller_id").references(() => sellers.id),
+    createdAt: utc("created_at"),
+  },
+  (table) => [
+    index("identity_event_request_idx").on(table.requestId),
+    check("identity_outcome", sql`${table.outcome} in ('allowed','denied')`),
+  ],
+);
+export const identityLimits = pgTable(
+  "identity_limits",
+  {
+    bucket: text("bucket").primaryKey(),
+    until: timestamp("until", { withTimezone: true }).notNull(),
+    hits: integer("hits").notNull(),
+  },
+  (table) => [
+    index("identity_limits_expiry_idx").on(table.until),
+    check("positive_hits", sql`${table.hits} > 0`),
   ],
 );
