@@ -1,6 +1,6 @@
 # Proposed PostgreSQL design and migration plan
 
-Status: design only. `db/schema.ts` defines 31 tables using Drizzle and PostgreSQL constraints. No migration, connection, data seed, provisioning, or SQL application occurred. No runtime code queries these tables. Deliberately omit active Drizzle deployment configuration and `netlify/database/migrations` so an unrelated deployment cannot activate the proposal. This is an explicit exception to the usual generate-with-schema workflow because Sprint 0 requests a proposed migration plan only.
+Status: dormant. The following inventory is the Sprint 0 baseline. Sprint 1 extended it with `customer_profiles`, `platform_owners`, `identity_events` and `identity_limits` and additive changes to users, addresses and memberships. `db/review/0001_identity_access.sql` is a versioned delta against that baseline, not an initial database. It is outside discovery paths. Only a disposable fixture was migrated. There is no deployment migration configuration or live database adapter. See `../operations/migration-review.md` before moving any SQL.
 
 Inventory of tables:
 

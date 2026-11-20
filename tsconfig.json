@@ -11,5 +11,5 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true
   },
-  "include": ["src", "db", "vite.config.ts", "drizzle.config.ts"]
+  "include": ["src", "db", "server", "vite.config.ts", "drizzle.config.ts"]
 }

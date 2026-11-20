@@ -1,0 +1,76 @@
+.account-page {
+  max-width: 64rem;
+  margin: auto;
+  padding: clamp(1.25rem, 5vw, 4rem);
+}
+.account-back {
+  display: inline-block;
+  padding-block: 0.7rem;
+  text-decoration: underline;
+}
+.account-page header {
+  margin: 2rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.account-page h1 {
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  line-height: 1.1;
+  margin: 0.6rem 0 1.4rem;
+}
+.account-layout {
+  display: grid;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  grid-template-columns: minmax(10rem, 1fr) minmax(0, 2.5fr);
+}
+.account-layout nav a {
+  display: block;
+  padding: 0.65rem 0.8rem;
+  border-left: 2px solid var(--line);
+}
+.account-layout a[aria-current] {
+  color: var(--burgundy);
+  border-color: currentColor;
+  background: var(--ivory);
+  font-weight: 650;
+}
+.account-content [role="status"] {
+  background: var(--ivory);
+  padding: 1rem;
+  border-left: 3px solid var(--gold);
+}
+.account-content h2,
+.account-content legend {
+  font:
+    500 2rem Georgia,
+    serif;
+  margin-bottom: 0.8rem;
+}
+.account-content label {
+  display: block;
+  margin: 1rem 0;
+}
+.account-content input {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid var(--line);
+  background: white;
+}
+.account-content button {
+  background: var(--burgundy);
+  color: white;
+  padding: 0.8rem 1.25rem;
+}
+@media (max-width: 42rem) {
+  .account-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .account-layout > nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  .account-layout nav a {
+    padding: 0.5rem;
+  }
+}

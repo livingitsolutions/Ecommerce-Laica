@@ -1,5 +1,7 @@
 # Tenancy and seller ownership
 
+Sprint 1 stages a trusted-storefront/customer-scoped address query and insert, a global one-to-one customer profile, and seller membership predicates. Global identity audit events may have no seller (login or platform authority). Existing seller-specific commerce audit remains separate. SQL scope and constraints are not a substitute for runtime permissions; see `identity-access.md`. No active tenant endpoints or RLS are claimed.
+
 Launch with one seller, The Bag Gallery, and one storefront resolved from trusted deployment configuration. Future domain-to-storefront mapping can be introduced without changing product identities. Every business table carries non-null seller_id; users and sellers are global roots. Customer addresses are seller-scoped and also user-owned to avoid leaking address books between merchants. seller_members maps global identities to scoped roles.
 
 The proposed schema gives each owned table a unique (seller_id,id) key and uses composite foreign keys for relationships. This prevents linking another seller's product, variant, order, chat session or media to the current seller. Seller-scoped slugs and SKUs allow independent merchants to choose matching values. Payment provider references and event IDs are globally unique per provider to prevent cross-tenant replay.
