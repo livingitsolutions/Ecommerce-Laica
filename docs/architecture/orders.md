@@ -1,0 +1,9 @@
+# Checkout and orders
+
+The demo bag is volatile browser presentation only and resets on refresh. It cannot create orders. A future server-side cart uses carts/cart_items and validates seller and customer ownership on every operation. No stored client totals are trusted.
+
+Secure checkout accepts variant IDs, quantities, address reference and an idempotency key. Resolve seller and shopper on the server, validate a strict Zod request, reload active published variants, calculate unit prices, promotions, tax and shipping from trusted rules, validate the serviceable shipping address, and reserve inventory in a transaction. Return an expiring quote for confirmation when prices change. Store immutable shipping and item snapshots plus currency, subtotal, tax, shipping, discounts and grand total. Retrying the same checkout key returns the original order; reusing it with different intent must conflict.
+
+Proposed order states: pending → awaiting_payment or cod_confirmed → confirmed → packing → shipped → delivered. Cancellation is allowed only by an explicit transition matrix with fulfillment and payment guards; failed/expired payment may close an unpaid order. Record each transition with actor/reason in order_status_history and an audit log. Payment state is separate from fulfillment and order state. Financial/order history is immutable; archive referenced catalog entities.
+
+Cancellation releases active reservations transactionally and schedules provider void/refund actions idempotently. Shipped orders need a return workflow, inspection and restock policy; do not merely decrement an order status. Shipments track provider reference/status, and webhook updates need provider verification and replay protection. Multiple shipments are structurally possible, but shipment item allocations and partial-return/refund tables require a reviewed future extension. No fulfillment integration is active.
