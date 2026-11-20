@@ -1,0 +1,9 @@
+# Live selling foundation
+
+The offline LiveSelling component composes a stream placeholder, static sample chat, shared product gallery, arbitrary-category product selector, variant and quantity selection, demo bag action and disabled Buy Now. The seller control disclosure is descriptive only. No chat is transmitted, stream started, audience count invented or Facebook connection made.
+
+Integration contracts: a dedicated streaming provider owns ingest credentials, transcoding, recording and playback; the application stores provider IDs and signed playback references. Never place ingest keys in browser bundles. The player needs adaptive playback, captions, error/retry handling and provider lifecycle events before launch.
+
+A real-time transport broadcasts durable chat and featured-product events. Persist ordered events in Netlify Database, publish only after commit, assign revision/sequence numbers and provide reconnect/backfill with exponential backoff. Netlify Server WebSockets can carry events, but process memory cannot synchronize multiple instances; choose an authorized provider/broker when required. Session snapshots plus revision checks prevent stale pins across clients. Seller-only pin commands validate membership and product visibility; live_featured_products references ordinary products, never bag-specific entities.
+
+Chat requires authenticated or scoped guest identity, per-user/IP/session rate limits, message length checks, spam controls, report/mute/ban, moderator queues and audit trails. Render as text, never raw HTML. Ban/mute persistence and moderation audit extensions are Sprint 1 design work. Seller controls require distinct start/end/pin/moderate capabilities. Buy actions use the normal checkout and reservation service; being featured does not bypass stock or create a separate inventory pool. Facebook boundaries are documented separately.

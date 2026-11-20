@@ -1,0 +1,305 @@
+{
+  "mode": "source-development",
+  "bypassCSP": true,
+  "target": "http://localhost:8889",
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "checks": [
+        {
+          "name": "Homepage rendering and horizontal layout",
+          "status": "PASS",
+          "detail": "Current source rendered; no document horizontal overflow"
+        },
+        {
+          "name": "Homepage keyboard skip link",
+          "status": "PASS"
+        },
+        {
+          "name": "Homepage accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 19
+              }
+            ]
+          }
+        },
+        {
+          "name": "Desktop navigation",
+          "status": "PASS"
+        },
+        {
+          "name": "Listing accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 9
+              }
+            ]
+          }
+        },
+        {
+          "name": "Search and empty state",
+          "status": "PASS"
+        },
+        {
+          "name": "Six categories share catalog, detail and variant gallery",
+          "status": "PASS",
+          "detail": "Handbags, Shoes, Clothing, Jewelry, Electronics, Home"
+        },
+        {
+          "name": "Zoom, nested dialog, focus restoration and gallery keyboard",
+          "status": "PASS"
+        },
+        {
+          "name": "Product dialog accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "Native video controls and actual playback",
+          "status": "PASS",
+          "detail": {
+            "currentTime": 0.093135,
+            "paused": false,
+            "readyState": 4
+          }
+        },
+        {
+          "name": "Demo cart cannot check out",
+          "status": "PASS"
+        },
+        {
+          "name": "Offline live studio and arbitrary-category feature selection",
+          "status": "PASS"
+        },
+        {
+          "name": "Live studio accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": []
+          }
+        },
+        {
+          "name": "Local link targets and demo policies",
+          "status": "PASS",
+          "detail": "All rendered anchor fragments resolve; policy preview opens. This is not exhaustive testing of every button."
+        },
+        {
+          "name": "No unexpected JavaScript, console, request or HTTP errors",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "accessibility": [
+        {
+          "name": "homepage",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 19
+            }
+          ]
+        },
+        {
+          "name": "listing",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 9
+            }
+          ]
+        },
+        {
+          "name": "product detail",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "name": "live studio",
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "checks": [
+        {
+          "name": "Homepage rendering and horizontal layout",
+          "status": "PASS",
+          "detail": "Current source rendered; no document horizontal overflow"
+        },
+        {
+          "name": "Homepage keyboard skip link",
+          "status": "PASS"
+        },
+        {
+          "name": "Homepage accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 19
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mobile navigation",
+          "status": "PASS"
+        },
+        {
+          "name": "Listing accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 10
+              }
+            ]
+          }
+        },
+        {
+          "name": "Search and empty state",
+          "status": "PASS"
+        },
+        {
+          "name": "Six categories share catalog, detail and variant gallery",
+          "status": "PASS",
+          "detail": "Handbags, Shoes, Clothing, Jewelry, Electronics, Home"
+        },
+        {
+          "name": "Zoom, nested dialog, focus restoration and gallery keyboard",
+          "status": "PASS"
+        },
+        {
+          "name": "Product dialog accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": [
+              {
+                "id": "color-contrast",
+                "nodes": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "Native video controls and actual playback",
+          "status": "PASS",
+          "detail": {
+            "currentTime": 0.054922,
+            "paused": false,
+            "readyState": 4
+          }
+        },
+        {
+          "name": "Demo cart cannot check out",
+          "status": "PASS"
+        },
+        {
+          "name": "Offline live studio and arbitrary-category feature selection",
+          "status": "PASS"
+        },
+        {
+          "name": "Live studio accessibility including contrast",
+          "status": "PASS",
+          "detail": {
+            "violations": [],
+            "incomplete": []
+          }
+        },
+        {
+          "name": "Local link targets and demo policies",
+          "status": "PASS",
+          "detail": "All rendered anchor fragments resolve; policy preview opens. This is not exhaustive testing of every button."
+        },
+        {
+          "name": "No unexpected JavaScript, console, request or HTTP errors",
+          "status": "PASS"
+        }
+      ],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "accessibility": [
+        {
+          "name": "homepage",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 19
+            }
+          ]
+        },
+        {
+          "name": "listing",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 10
+            }
+          ]
+        },
+        {
+          "name": "product detail",
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": 1
+            }
+          ]
+        },
+        {
+          "name": "live studio",
+          "violations": [],
+          "incomplete": []
+        }
+      ]
+    }
+  ],
+  "browser": "159.0.8154.6",
+  "note": "This harness never builds or deploys. Development CSP bypass is limited to the browser context; production configuration is unchanged."
+}

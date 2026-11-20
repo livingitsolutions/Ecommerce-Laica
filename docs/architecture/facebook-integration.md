@@ -1,0 +1,7 @@
+# Facebook Live boundaries
+
+No Meta SDK, app, tokens, streams or comments are connected. Facebook Live broadcasting and comment ingestion depend on a dedicated streaming provider and Meta app/product availability, Page ownership, app review and current permissions. Do not promise approval or assume a permission name remains available.
+
+After merchant authorization, verify the official Graph API documentation, supported Page Live Video APIs, webhook topics, scopes, app review and business verification requirements. Broadcast through an approved simulcast path and store encrypted Page access tokens only server-side, with least privilege and revocation. Streaming destinations and ingest keys must never be public.
+
+Verify Meta webhook subscription challenges and signatures exactly as documented, deduplicate external comment IDs, apply moderation and map comments into a seller/session/source namespace. Request only approved data, respect platform retention/deletion requirements and provide deauthorization/data deletion workflows. Never infer buyer consent, payment, inventory allocation or an order from a comment. Platform comments cannot be assumed to be authenticated commerce users; account linking needs explicit consent. Fail closed if permissions expire, and provide the website chat independently. Provider/Meta approvals and merchant content policy are external launch dependencies.

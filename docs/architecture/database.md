@@ -1,0 +1,33 @@
+# Proposed PostgreSQL design and migration plan
+
+Status: design only. `db/schema.ts` defines 31 tables using Drizzle and PostgreSQL constraints. No migration, connection, data seed, provisioning, or SQL application occurred. No runtime code queries these tables. Deliberately omit active Drizzle deployment configuration and `netlify/database/migrations` so an unrelated deployment cannot activate the proposal. This is an explicit exception to the usual generate-with-schema workflow because Sprint 0 requests a proposed migration plan only.
+
+Inventory of tables:
+
+| Domain      | Tables                                                                                                                                                                                                                                                     |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Identity    | users, customer_addresses                                                                                                                                                                                                                                  |
+| Sellers     | sellers, seller_members                                                                                                                                                                                                                                    |
+| Catalog     | categories, category_attributes, category_attribute_options, products, product_categories, product_attribute_values, product_option_types, product_option_values, product_variants, variant_option_values, product_media, collections, collection_products |
+| Inventory   | inventory, inventory_reservations                                                                                                                                                                                                                          |
+| Commerce    | carts, cart_items, orders, order_items, order_status_history                                                                                                                                                                                               |
+| Payments    | payment_attempts, payment_events                                                                                                                                                                                                                           |
+| Fulfillment | shipments                                                                                                                                                                                                                                                  |
+| Live        | live_sessions, live_featured_products, live_chat_messages                                                                                                                                                                                                  |
+| Operations  | audit_logs                                                                                                                                                                                                                                                 |
+
+All keys are UUIDs. All business rows have explicit seller ownership, UTC-aware created/updated timestamps, an ownership index and composite unique identity. FK deletion defaults to NO ACTION: archive rather than delete catalog records referenced by order snapshots. Historical item snapshots retain names, options, SKU, currency and price independent of later catalog changes. The shipping address is an immutable order JSON snapshot, while addresses themselves are normalized rows. Payment event payloads retain only a digest and minimal metadata, not secrets or raw payment data. Media rows hold object references only.
+
+Prices use non-negative integer minor units; inventory checks enforce 0 ≤ reserved ≤ on_hand; quantities are positive. Idempotency keys exist on checkout, reservations and attempts; payment events are unique by provider/event ID. Timestamps require application updates to updated_at; defaultNow only supplies insert time. Add triggers if database-managed update time is preferred. Currency compatibility, required attributes, full variant option coverage, category cycles, and state transitions still require reviewed service/trigger enforcement. RLS and concurrency behavior have not been executed or tested.
+
+Proposed ordered migration phases, after explicit authorization:
+
+1. Pin supported @netlify/database and Drizzle versions, configure Drizzle Kit with `schema: ./db/schema.ts`, PostgreSQL dialect and `out: netlify/database/migrations`. Current integration guidance requires drizzle-orm@beta and drizzle-kit@beta; registry deprecation notices recommend RC, so confirm Netlify adapter compatibility before upgrading.
+2. Generate and review named identity/tenancy migrations, restricted database roles, RLS and tenant transaction context. Verify customer and guest ownership policies.
+3. Generate catalog/category/attribute/variant/media/collection migrations. Add cross-table type/category validation and a recursive category cycle guard; inspect FK and index query plans.
+4. Generate stock/cart/order/reservation/history migrations. Add necessary state and currency checks, immutable history policies, and concurrent reservation tests.
+5. Generate payment/fulfillment/live/audit migrations with append-only grants, state validation, webhook uniqueness and retention policies.
+6. Test generated SQL on an isolated Netlify preview database branch with synthetic two-seller data. Verify rollback/roll-forward, duplicates, oversell races, deadlock retries, deleted-catalog behavior, and backup recovery. Seed only an authorized seller, no customers/orders by default.
+7. Obtain explicit production migration and deployment approval. Netlify applies reviewed migrations during deployment; never run drizzle-kit push/migrate or direct DDL. Use expand/contract changes and forward correction migrations after application; do not edit applied SQL.
+
+Do not activate runtime persistence until all corresponding migrations and policies exist. The declared schema is a foundation, not a certification of transaction safety.

@@ -1,0 +1,9 @@
+# Tenancy and seller ownership
+
+Launch with one seller, The Bag Gallery, and one storefront resolved from trusted deployment configuration. Future domain-to-storefront mapping can be introduced without changing product identities. Every business table carries non-null seller_id; users and sellers are global roots. Customer addresses are seller-scoped and also user-owned to avoid leaking address books between merchants. seller_members maps global identities to scoped roles.
+
+The proposed schema gives each owned table a unique (seller_id,id) key and uses composite foreign keys for relationships. This prevents linking another seller's product, variant, order, chat session or media to the current seller. Seller-scoped slugs and SKUs allow independent merchants to choose matching values. Payment provider references and event IDs are globally unique per provider to prevent cross-tenant replay.
+
+Server authorization must resolve seller scope from the trusted storefront/session, then verify membership or customer ownership. Ignore seller IDs submitted as authority. Every repository method takes a verified tenant context, including list, count, export, background processing, and object deletion. A UUID is not authorization. Customer access additionally requires orders.user_id or a hashed, expiring guest capability.
+
+Before activation add PostgreSQL RLS policies with SET LOCAL transaction context and a restricted application role. Composite keys enforce relational isolation but do not restrict SELECT; RLS is not yet implemented. Test two sellers for read/write/count/media/webhook isolation and worker context reset before launch. Multi-seller payments, onboarding, commissions, payouts, dispute ownership, and a multi-seller checkout orchestration remain future work. Current carts and orders are deliberately single-seller; a marketplace checkout groups separate seller orders.
