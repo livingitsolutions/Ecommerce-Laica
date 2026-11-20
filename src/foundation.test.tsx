@@ -10,6 +10,7 @@ import {
 import userEvent from "@testing-library/user-event";
 import axe from "axe-core";
 import App from "./App";
+import { Modal } from "./shared/Modal";
 import { products } from "./features/catalog/sample-data";
 import { filterProducts, selectionSchema } from "./features/catalog/model";
 import { ProductDetail } from "./features/catalog/ProductDetail";
@@ -73,6 +74,36 @@ describe("category-neutral commerce contracts", () => {
   });
 });
 describe("interactive foundations", () => {
+  it("cancels only the topmost nested modal", () => {
+    const parentClose = vi.fn();
+    const childClose = vi.fn();
+    render(
+      <Modal title="Parent" onClose={parentClose}>
+        <Modal title="Child" onClose={childClose}>
+          <p>Nested viewer</p>
+        </Modal>
+      </Modal>,
+    );
+    const cancellation = new Event("cancel", {
+      cancelable: true,
+      bubbles: false,
+    });
+    fireEvent(screen.getByRole("dialog", { name: "Child" }), cancellation);
+    expect(childClose).toHaveBeenCalledOnce();
+    expect(parentClose).not.toHaveBeenCalled();
+    expect(cancellation.defaultPrevented).toBe(true);
+  });
+  it("preserves native video arrow shortcuts", () => {
+    const { container } = render(
+      <MediaGallery media={products[0].media} variantId="arc-b" />,
+    );
+    fireEvent.click(screen.getByLabelText("View video 3"));
+    fireEvent.keyDown(container.querySelector("video")!, { key: "ArrowRight" });
+    expect(
+      screen.getByLabelText("View video 3").getAttribute("aria-pressed"),
+    ).toBe("true");
+  });
+
   it("selects a multidimensional shoe variant with quantity, using the shared detail component", async () => {
     let selection: unknown;
     render(

@@ -86,7 +86,6 @@ export default function Storefront() {
               setPage("home");
               setOnlySaved(false);
             }}
-            aria-label="The Bag Gallery home"
           >
             <span className="brand-mark">BG</span>
             <span>
@@ -287,7 +286,11 @@ export default function Storefront() {
               </button>
             )}
           </div>
-          <div className="category-tabs" aria-label="Filter by category">
+          <div
+            className="category-tabs"
+            role="group"
+            aria-label="Filter by category"
+          >
             {categories.map((c) => (
               <button
                 className={category === c ? "active" : ""}

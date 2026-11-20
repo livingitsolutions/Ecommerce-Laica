@@ -1,0 +1,50 @@
+{
+  "note": "Pre-existing ignored artifacts only. No build executed; these do not contain Sprint 0.1 fixes and are not a source-matched release candidate.",
+  "bypassCSP": false,
+  "assets": [
+    {
+      "path": "/index.html",
+      "bytes": 650,
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "sha256": "f62898e51a5f85b4456fce67267597ce1933d2c6c688d3c70a949f33af55f16b"
+    },
+    {
+      "path": "/assets/index-Bg357qIu.js",
+      "bytes": 338193,
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "sha256": "55a29c236cc7c5eb8d941a48476b7964b9d69947ebed1e9f0283d58868c8efb9"
+    },
+    {
+      "path": "/assets/index-jCky8RX9.css",
+      "bytes": 26395,
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "sha256": "d37cccda5c5aea84cffd8bd9d5acbb53158ad708518516a175f6325126c65f76"
+    }
+  ],
+  "routes": [
+    {
+      "path": "/",
+      "status": 200,
+      "spaEntryMatches": true,
+      "csp": "default-src 'self'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; media-src 'self' https://interactive-examples.mdn.mozilla.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    },
+    {
+      "path": "/catalog/example",
+      "status": 200,
+      "spaEntryMatches": true,
+      "csp": "default-src 'self'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; media-src 'self' https://interactive-examples.mdn.mozilla.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    },
+    {
+      "path": "/products/example",
+      "status": 200,
+      "spaEntryMatches": true,
+      "csp": "default-src 'self'; img-src 'self' https://images.unsplash.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; media-src 'self' https://interactive-examples.mdn.mozilla.net; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+    }
+  ],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "status": "PASS"
+}

@@ -26,7 +26,11 @@ export function Modal({
       aria-label={title}
       ref={ref}
       className={wide ? "modal wide" : "modal"}
-      onCancel={onClose}
+      onCancel={(event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        onClose();
+      }}
     >
       <div className="modal-heading">
         <h2>{title}</h2>

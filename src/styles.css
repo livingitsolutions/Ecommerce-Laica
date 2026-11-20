@@ -260,7 +260,7 @@ small {
 .hero-copy > p:not(.eyebrow) {
   font-size: 12px;
   line-height: 1.9;
-  color: #766b64;
+  color: #665b54;
 }
 .primary,
 .cream-button {
@@ -286,7 +286,7 @@ small {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #847666;
+  color: #6d5f50;
   margin-top: 52px;
 }
 .little-line {
@@ -551,7 +551,7 @@ small {
   font-size: 8px;
   text-transform: uppercase;
   letter-spacing: 1.4px;
-  color: #877970;
+  color: #72645a;
   margin: 16px 0 5px;
 }
 .product-name {
@@ -586,7 +586,7 @@ small {
 .sample-note {
   text-align: center;
   font-size: 9px;
-  color: #80736b;
+  color: #71645b;
   margin: 28px 0 0;
 }
 .live-banner {
@@ -734,7 +734,7 @@ footer button {
   align-items: center;
   gap: 15px;
   font-size: 8px;
-  color: #827367;
+  color: #6e5f53;
   min-height: 55px;
 }
 .footer-bottom > span:nth-child(2) {
@@ -1028,7 +1028,7 @@ dd {
   font-size: 12px;
 }
 .chat small {
-  color: #806b57;
+  color: #6f5b48;
 }
 .chat form {
   display: flex;

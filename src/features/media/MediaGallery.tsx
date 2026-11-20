@@ -48,6 +48,9 @@ export function MediaGallery({
     <div
       className="gallery"
       onKeyDown={(e) => {
+        // Preserve native playback shortcuts instead of switching gallery media.
+        if (e.target instanceof HTMLElement && e.target.closest("video"))
+          return;
         if (e.key === "ArrowRight") {
           e.preventDefault();
           move(1);
@@ -95,7 +98,7 @@ export function MediaGallery({
           )}
         </div>
       </div>
-      <div className="thumbnails" aria-label="Product media">
+      <div className="thumbnails" role="group" aria-label="Product media">
         {entries.map((m, i) => (
           <button
             key={m.id}

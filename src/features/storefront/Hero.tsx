@@ -35,7 +35,7 @@ export function Hero({
       <div className="hero-image">
         <img
           src={photo("photo-1548036328-c9fa89d128fa", 1600)}
-          alt="Burgundy leather shoulder bag with gold-tone chain, displayed on a warm neutral backdrop"
+          alt="Illustrative black quilted shoulder bag with a gold-tone chain"
           fetchPriority="high"
         />
         <span className="image-caption">THE NEW EVERYDAY ICONS</span>
